@@ -252,3 +252,41 @@ class Prediction_Data_validation:
 
         if os.path.exists('Prediction_Output_File/Predictions.csv'):
             os.remove('Prediction_Output_File/Predictions.csv')
+
+    def validateMissingValuesInWhole(self):
+        """
+            Method Name: validateMissingValuesInWhole
+            Description: This function valdiates if any column in the csv file has all the values missing
+                         If all the values are missing, the file is not suitable for processing.
+                         Such files are moved to bad raw data.
+            Output: None
+            On Failure: Exception 
+        """
+        try:
+            f = open("Prediction_Logs/missingValuesnColumn.txt",'a+')
+            self.logger.log(f,"Missing Values Validation Started!!")
+
+            for file in listdir('Prediction_Raw_Files_Validated/Good_Raw/'):
+                csv = pd.read_csv("Prediction_Raw_Files_Validated/Good_Raw"+file)
+                count=0
+                for columns in csv:
+                    if (len(csv[columns])-csv[columns])==len(csv[columns]):
+                        count+=1
+                        shutil.move("Prediction_Raw_Files_Validated/Good_Raw/"+file,
+                                    "Prediction_Raw_Files_Validated/Bad_Raw")
+                        self.logger.log(f,"Invalida  Column Length for the file!! File move to Bad Raw Folder:: %s"%file)
+                        break
+                    if count==0:
+                        csv.rename(columns={"Unnamed:0":"Mushroom"},inplace=True)
+                        csv.to_csv("Prediction_Raw_Files_Validated/Good_Raw/"+file,index=None,header=True)
+        except OSError:
+            f=open("Prediction_Logs/missingValuesInColumn.txt",'a+')
+            self.logger.log(f,"Error occured while moving the file:: %s"%OSError)
+            f.close()
+            raise OSError
+        except Exception as e:
+            f = open("Prediction_Logs/missingValuesInColumn.txt",'a+')
+            self.logger.log(f,"Error Ocurred: %s"%e)
+            f.close()
+            raise e
+        f.close()
