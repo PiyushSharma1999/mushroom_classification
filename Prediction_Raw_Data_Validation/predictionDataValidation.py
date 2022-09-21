@@ -253,9 +253,9 @@ class Prediction_Data_validation:
         if os.path.exists('Prediction_Output_File/Predictions.csv'):
             os.remove('Prediction_Output_File/Predictions.csv')
 
-    def validateMissingValuesInWhole(self):
+    def validateMissingValuesInWholeColumn(self):
         """
-            Method Name: validateMissingValuesInWhole
+            Method Name: validateMissingValuesInWholeColumn
             Description: This function valdiates if any column in the csv file has all the values missing
                          If all the values are missing, the file is not suitable for processing.
                          Such files are moved to bad raw data.
