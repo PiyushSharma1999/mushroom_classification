@@ -113,3 +113,59 @@ class Preprocessing:
         for column in data.drop(['class'],axis=1).columns:
             data = pd.get_dummies(data, columns=[column])
         return data
+    
+    def encodeCategoricalValuesPrediction(self,data):
+        """
+            Method Name: encodeCategoricalValuesPrediction
+            Description: This method encodes all the categorical values in the prediction set.
+            Output: A DataFrame hich all the categorical values encoded.
+            On Failure: Raise Exception
+        """
+        for column in data.columns:
+            data = pd.get_dummies(data,columns=[column],drop_first=True)
+        return data
+    
+    def impute_missing_values(self,data,cols_with_missing_values):
+        """
+            Method Name: impute_missing_values
+            Description: This method replaces all the missing values in the Dataframe using CategoricalImputer.
+            Output: A Dataframe which has all the missing values imputed.
+            On Failure: Raise Exception
+        """
+        self.logger_object.log(self.file_object,'Entered the impute_missing_values method of th Preprocessor class.') 
+        self.data = data
+        self.cols_with_missing_values=cols_with_missing_values 
+        try:
+            self.imputer = CategoricalImputer()
+            for col in self.cols_with_missing_values:
+                self.data[col] = self.imputer.fit_transform(self.data[col])
+            self.logger_object.log(self.file_object,'Imputing missing values Successful. Exited the impute_missing_values method of Preprocessor class.')
+            return self.data
+        except Exception as e:
+            self.logger_object.log(self.file_object,'Exception occured in impute_missing_values method of the Preprocessor class. Exception message: '+str(e))
+            self.logger_object.log(self.file_object,'Imputing missing values failed. Exited the impute_missing_values of the Preprocessor class.')
+            raise Exception()
+
+    def get_column_with_zero_std_deviation(self,data):
+        """
+            Method Name: get_column_with_zero_std_deviation
+            Description: This method find out the columns which have a standard deviation of zero.
+            Output: List of the columns with standard deviation of zero
+            On Failure: Raise Exception
+        """
+        self.logger_object.log(self.file_object,'Entered the get_column_with_zero_std_deviation method of the Preprocessor class.')
+        self.columns = data.columns
+        self.data_n = data.describe()
+        self.col_to_drop = []
+        try:
+            for x in self.columns:
+                if (self.data_n[x] == 0): # check if standard deviation is zero
+                    self.col_to_drop.append(x) # prepare the list of columns ith zero standard deviation
+            self.logger_object.log(self.file_object,'Column search for standard Deviation of zero Successful. Exited the get_column_with_zero_std_deviation method of Preprocessor class.')
+            return self.col_to_drop
+        except Exception as e:
+            self.logger_object.log(self.file_object,'Exception occured in get_column_with_zero_std_deviation method of Preprocessor class. Exception message: '+str(e))
+            self.logger_object.log(self.file_object,'Column search for Standard Deviation of Zero Failed. Exited the get_column_with_zero_std_deviation method of preprocessor class.')
+            raise Exception()
+            
+                
