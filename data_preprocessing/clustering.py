@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from kneed import KneeLocator
+from file_operations import file_methods
 
 class KMeansClustering:
     """
@@ -53,4 +54,15 @@ class KMeansClustering:
             self.kmeans = KMeans(n_clusters=number_of_clusters,init='k-means++',random_state=42)
             self.y_means = self.kmeans.fit_predict(data) # divide data into clusters
 
+            self.file_op = file_methods.File_Operations(self.file_object,self.logger_object)
+            self.save_model = self.file_op.save_model(self.kmeans,'KMeans') # saving the KMeans model to directory
+                                                                            # passing 'Model' as the functions need three parameters
+
+            self.data['Cluster'] = self.y_means # create  a new column in dataset for storing the cluster inforamtion
+            self.logger_object.log(self.file_object,'successfully created '+str(self.kn.knee)+' clusters. Exited the create_cluster method of KMeansClustering class.')
+            return self.data
+        except Exception as e:
+            self.logger_object.log(self.file_object,'Exception occured in create_clusters method of the KMeansClustering class. Exception message: '+str(e))
+            self.logger_object.log(self.file_object,'Fitting the data to clusters failed. Exited the create_clusters method of the KMeansClustering class.')
+            raise Exception()
             
