@@ -53,7 +53,7 @@ class File_Operations:
             self.logger_object.log(self.file_object,'Mode File '+filename+' could not be saved. Exited the load_model method of the File_Operations class')
             raise Exception()
     
-    def find_correct_model(self,cluster_name):
+    def find_correct_model_file(self,cluster_name):
         """
             Method Name: find_correct_model
             Description: Select the correct model based on cluster number
