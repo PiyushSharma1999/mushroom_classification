@@ -58,7 +58,27 @@ def predictRouteClient():
         return Response("Error  Occured! %s"%e)
 
 
+@app.route("/train",methods=['POST'])
+@cross_origin
+def trainRouteClient():
 
+    try:
+        if request.json['folderPath']is not None:
+            path = request.json['folderPath']
+            train_valObj = train_validation(path) # object initialization
 
+            train_valObj.train_validation() #calling the model for the files in the table
+    
+    except ValueError:
+
+        return Response("Error Occured! %s"%ValueError)
+    except KeyError:
+
+        return Response("Error Occured! %s"%KeyError)
+    
+    except Exception as e:
+        return Response("Error Occured! %s"%e)
+    return Response("Training Successful!!")
+    
 if __name__ == '__main__':
     app.run(debug=True)
