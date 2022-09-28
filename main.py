@@ -21,8 +21,8 @@ CORS(app)
 def home():
     return render_template('index.html')
 
-@app.route("/", methods=['GET'])
-@cross_origin
+@app.route("/predict", methods=['POST'])
+@cross_origin()
 def predictRouteClient():
     try:
         if request.json is not None:
@@ -59,7 +59,7 @@ def predictRouteClient():
 
 
 @app.route("/train",methods=['POST'])
-@cross_origin
+@cross_origin()
 def trainRouteClient():
 
     try:
@@ -68,6 +68,9 @@ def trainRouteClient():
             train_valObj = train_validation(path) # object initialization
 
             train_valObj.train_validation() #calling the model for the files in the table
+
+            trainModelObj = trainModel()    # object initialization
+            trainModelObj.trainingModel()   # training the model for the files in the table
     
     except ValueError:
 
@@ -80,5 +83,5 @@ def trainRouteClient():
         return Response("Error Occured! %s"%e)
     return Response("Training Successful!!")
     
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
