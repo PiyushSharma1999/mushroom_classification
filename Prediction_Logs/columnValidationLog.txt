@@ -1,0 +1,3 @@
+2022-09-28/19:32:44		Column Length validation Started!!
+2022-09-28/19:32:45		Invalid Column Length for the file!! File moved to Bad Raw Folder:: mushroom_08012018_120088.csv
+2022-09-28/19:32:45		Column Length Validation Completed!!
