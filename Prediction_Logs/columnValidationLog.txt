@@ -1,11 +1,15 @@
-2022-09-28/19:32:44		Column Length validation Started!!
-2022-09-28/19:32:45		Invalid Column Length for the file!! File moved to Bad Raw Folder:: mushroom_08012018_120088.csv
-2022-09-28/19:32:45		Column Length Validation Completed!!
-2022-09-29/10:54:49		Column Length validation Started!!
-2022-09-29/10:54:49		Error Occured while moving the file :: <class 'OSError'>
-2022-09-29/10:56:06		Column Length validation Started!!
-2022-09-29/10:56:06		Error Occured while moving the file :: <class 'OSError'>
-2022-09-29/11:01:55		Column Length validation Started!!
-2022-09-29/11:01:55		Error Occured while moving the file :: <class 'OSError'>
-2022-09-29/11:04:15		Column Length validation Started!!
-2022-09-29/11:04:16		Error Occured while moving the file :: <class 'OSError'>
+2020-02-14/15:01:03		Column Length Validation Started!!
+2020-02-14/15:01:03		Column Length Validation Completed!!
+2020-02-14/15:04:08		Column Length Validation Started!!
+2020-02-14/15:04:08		Column Length Validation Completed!!
+2020-02-14/15:15:52		Column Length Validation Started!!
+2020-02-14/15:15:52		Column Length Validation Completed!!
+2020-02-14/15:22:02		Column Length Validation Started!!
+2020-02-14/15:22:02		Column Length Validation Completed!!
+2020-02-14/15:27:39		Column Length Validation Started!!
+2020-02-14/15:27:39		Column Length Validation Completed!!
+2020-02-14/18:39:21		Column Length Validation Started!!
+2020-02-14/18:39:21		Invalid Column Length for the file!! File moved to Bad Raw Folder :: mushroom_08012018_120088.csv
+2020-02-14/18:39:21		Column Length Validation Completed!!
+2022-09-29/11:11:53		Column Length validation Started!!
+2022-09-29/11:11:53		Error Occured while moving the file :: <class 'OSError'>
